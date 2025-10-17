@@ -313,9 +313,89 @@ compose.yaml代码解释
 
 
 https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/
+
+
 https://docs.docker.com/get-started/docker-concepts/running-containers/overriding-container-defaults/
+
+
 https://docs.docker.com/get-started/docker-concepts/running-containers/persisting-container-data/
+
+
+
+# Sharing local files with containers
+这个的目的是把docker1里面的内容传递到本地，但是把本地文件分享给docker有风险
+将此类敏感信息直接存储在容器映像中会带来安全风险，特别是在映像共享期间。为了应对这一挑战，Docker提供了存储选项，弥合了容器隔离和主机数据之间的差距。
+Docker提供了两种主要的存储选项，用于在主机和容器之间持久化数据和共享文件：卷和绑定挂载。
+
+容器volume和bind mounts的区别
+
+用 bind mount 或挂载主机目录给容器时，需要注意主机文件／目录的权限，否则容器可能无权访问这些文件。
+
+## 实操
+输入
+docker run -d -p 8080:80 --name my_site httpd:2.4
+<img width="1414" height="224" alt="image" src="https://github.com/user-attachments/assets/de8588c2-ebf1-4247-8f33-b8f779bdd753" />
+
+delete my_site container
+<img width="1207" height="385" alt="image" src="https://github.com/user-attachments/assets/17cd6a77-f15e-4eb4-8b57-77c6a273f8a1" />
+
+选择使用另一种方式来启动
+docker run -d --name my_site -p 8080:80 -v .:/usr/local/apache2/htdocs/ httpd:2.4
+
+<img width="893" height="546" alt="image" src="https://github.com/user-attachments/assets/484a96e9-42c9-4a12-a459-d086890128ab" />
+
+这里是展示一个双向bind的机制
+Bind Mount 的特性​​
+​​实时双向同步​​：主机和容器内的文件会完全同步，任何一方的修改都会立即反映在另一方。
+​​删除文件的影响​​：
+如果你在主机删除 index.html，容器内的 /usr/local/apache2/htdocs/index.html也会​​立刻消失​​。
+Docker Desktop 的 GUI 文件浏览器（“Files”标签）会显示容器内文件的实时状态，所以删除后这里也会看不到文件。
+
+<img width="1358" height="273" alt="image" src="https://github.com/user-attachments/assets/262d4539-ac3a-4bd1-99d3-bbf866f3f1d4" />
+<img width="1066" height="184" alt="image" src="https://github.com/user-attachments/assets/fde92e86-89e5-40dc-9228-034e9eab4e5b" />
+
+
+# Multi-container applications
+## 解决的问题，就是关于很多应用程序都要一个个部署，很麻烦，这时 Docker Compose 就可以发挥作用了。
+
+通过利用 Docker Compose 运行多容器设置，您可以构建以模块化、可扩展性和一致性为核心的复杂应用程序。
+
+## 实操
+Navigate into the nginx directory to build the image by running the following command:
+通过运行以下命令导航到 nginx 目录来构建映像：
+（1）首先，克隆仓库和构建镜像
+
+ docker build -t nginx .
+Navigate into the web directory and run the following command to build the first web image:
+导航到 web 目录并运行以下命令来构建第一个 web 图像：
+
+
+ docker build -t web .
+先构建两个镜像
+（2）接着运行容器
+在运行多容器应用程序之前，你需要创建一个网络，以便所有容器之间进行通信。你可以使用 docker network create 网络
+docker network create sample-app
+
+具体的操作：
+1.创建一个网络
+docker network create sample-app
+2.启动redis容器
+docker run -d  --name redis --network sample-app --network-alias redis redis
+3.下面来启动容器
+docker run -d --name web1 -h web1 --network sample-app --network-alias web1 web
+
+docker run -d --name web2 -h web2 --network sample-app --network-alias web2 web
+docker run -d --name nginx --network sample-app  -p 80:80 nginx
+
+
+上面的配置比较复杂，可以Simplify the deployment using Docker Compose
+
+
+
 https://docs.docker.com/get-started/docker-concepts/running-containers/sharing-local-files/
+
+
+
 https://docs.docker.com/get-started/docker-concepts/running-containers/multi-container-applications/
 
 
