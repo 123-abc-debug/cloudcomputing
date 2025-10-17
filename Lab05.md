@@ -318,7 +318,15 @@ https://docs.docker.com/get-started/docker-concepts/running-containers/publishin
 https://docs.docker.com/get-started/docker-concepts/running-containers/overriding-container-defaults/
 
 
+
+# Persisting container data
+
 https://docs.docker.com/get-started/docker-concepts/running-containers/persisting-container-data/
+卷是一种存储机制，它能够在单个容器的生命周期之外持久化数据。可以将其想象成提供从容器内部到容器外部的快捷方式或符号链接。
+
+这里就是创建一个卷，会有结果
+
+
 
 
 
@@ -355,6 +363,9 @@ Docker Desktop 的 GUI 文件浏览器（“Files”标签）会显示容器内�
 <img width="1066" height="184" alt="image" src="https://github.com/user-attachments/assets/fde92e86-89e5-40dc-9228-034e9eab4e5b" />
 
 
+
+
+
 # Multi-container applications
 ## 解决的问题，就是关于很多应用程序都要一个个部署，很麻烦，这时 Docker Compose 就可以发挥作用了。
 
@@ -389,6 +400,12 @@ docker run -d --name nginx --network sample-app  -p 80:80 nginx
 
 
 上面的配置比较复杂，可以Simplify the deployment using Docker Compose
+如前所述，使用 Docker Compose，您无需运行多个 docker run 命令。您只需在一个名为 compose.yml 的 YAML 文件中定义整个多容器应用程序即可。
+
+就是配置compose.yaml的文件来设置
+
+
+
 
 
 
