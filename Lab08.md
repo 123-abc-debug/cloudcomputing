@@ -20,8 +20,11 @@ Deploy the Bookinfo sample application.
 
 Review the Traffic Management concepts doc.
 查看交通管理概念文档。
+流量管理的概念：stio 流量管理的核心目标是提供对服务间请求流动的 精细控制
 
-
+首先介绍一下
+# 第一个，应用基于权重的路由
+（1）首先，首先，运行此命令将所有流量路由到 v1 版本
 
 https://istio.io/latest/docs/tasks/traffic-management/request-routing/
 https://istio.io/latest/docs/tasks/traffic-management/fault-injection/
