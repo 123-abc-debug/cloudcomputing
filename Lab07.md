@@ -88,6 +88,10 @@ kubectl annotate gateway bookinfo-gateway networking.istio.io/service-type=Clust
 kubectl port-forward svc/bookinfo-gateway-istio 8080:80
 
 
+<img width="2093" height="1085" alt="image" src="https://github.com/user-attachments/assets/9acf8532-74d6-403f-b76e-175901996317" />
+
+通过检查响应中的页面标题来验证应用程序是否在集群内运行：
+<img width="1943" height="254" alt="image" src="https://github.com/user-attachments/assets/91eb3cd5-888f-4feb-8e80-ac737a95d506" />
 
 
 （3）查看仪表板
@@ -98,6 +102,16 @@ Istio 与多种不同的遥测应用程序集成。这些应用程序可以帮�
 Install Kiali and the other addons and wait for them to be deployed.
 访问 Kiali 仪表板。
 
+安装 Kiali 和其他插件并等待它们部署。
+ istioctl dashboard kiali
+ <img width="1281" height="280" alt="image" src="https://github.com/user-attachments/assets/bf21124e-1722-4f12-8702-0dd41e04acf4" />
+
+
+访问 Kiali 仪表板。
+<img width="2208" height="1465" alt="image" src="https://github.com/user-attachments/assets/f4d1c982-4017-4cc8-b3cc-3a912cc12622" />
+
+
+第三个任务，删除
 
 
 
