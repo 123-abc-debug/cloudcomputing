@@ -157,7 +157,8 @@ kubectl exec "$FORTIO_POD" -c fortio -- /usr/bin/fortio load -c 2 -qps 0 -n 20 -
 <img width="952" height="665" alt="image" src="https://github.com/user-attachments/assets/15e8a8fd-443a-403b-8d81-b9f8201aca36" />
 
 <img width="1198" height="850" alt="image" src="https://github.com/user-attachments/assets/adce122e-451c-498e-8956-c32815471cae" />
-
+这里能看到什么时候熔断
+<img width="915" height="93" alt="image" src="https://github.com/user-attachments/assets/4c4ee963-c477-483c-8495-bc681dc2588f" />
 
 
 
