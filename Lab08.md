@@ -61,6 +61,24 @@ kubectl delete -f samples/bookinfo/networking/virtual-service-all-v1.yaml
 
 https://istio.io/latest/docs/tasks/traffic-management/request-routing/
 
+此任务的初始目标是应用规则，将所有流量路由到微服务的 v1 （版本 1）。稍后，您将应用规则，根据 HTTP 请求标头的值来路由流量。这里的意思是自己来控制路由的流量吗
+
+（1）首先，路由至版本一
+Istio 使用虚拟服务来定义路由规则。运行以下命令应用虚拟服务，将所有流量路由到每个微服务的 v1 ：
+kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
+强制将所有流量路由到 v1版本
+
+kubectl get virtualservices -o yaml
+kubectl get destinationrules -o yaml
+
+应用一个 VirtualService（虚拟服务）配置​​ 到 Kubernetes 集群
+​​列出当前集群中的所有 VirtualService 资源​​
+列出当前集群中的所有 DestinationRule 资源
+ 
+（2）接着，测试新的路由配置
+您可以通过再次刷新 /productpage 轻松测试新配置 浏览器中的 Bookinfo 应用程序。 请注意，页面的评论部分没有显示评级星，没有 无论刷新多少次。这是因为您已将 Istio 配置为路由 所有评论服务的流量都流向版本 reviews:v1 ，并且此版本的服务不访问星级评分服务。
+
+（3）基于用户身份的路由
 
 
 
