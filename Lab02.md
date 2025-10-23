@@ -1,47 +1,47 @@
-1.Get the following files from your lecturer: 
+# Lab 02: Nebula VPN Configuration and Connectivity
 
-![8598aca93299843b6b91f38ab586f1a1](C:\Users\21534\Desktop\Lab02.assets\8598aca93299843b6b91f38ab586f1a1.png)
+## 1. Cryptographic Assets Received 
 
-(1) This is the personal digital certificate (also known as client certificate or user certificate) issued to you
+The security and identity of the node rely on three essential files provided by the lecturer (Certificate Authority).
 
-It is a digital certificate of the public key issued to you, used to prove your identity.
+| File Name | Role & Type | Core Function in Nebula | Security Requirement |
+| :--- | :--- | :--- | :--- |
+| **`yinyuang.crt`** | **Client Certificate** (Public Key) | **Proves your identity** to the network peers and Lighthouse. It contains the public key necessary for others to encrypt data for you. | Publicly shareable (but used internally for identity). |
+| **`yinyuang.key`** | **Private Key** | Used to **decrypt data** sent to your node and to create **digital signatures** to authenticate your outgoing messages. | **MUST be kept absolutely confidential.** |
+| **`ca.crt`** | **Root CA Certificate** | Establishes the network's **trust domain**. It verifies that your `yourname.crt` (and all other peer certificates) were issued by the trusted CA. | Publicly shareable, needed by all nodes. |
+<img width="1495" height="671" alt="image" src="https://github.com/user-attachments/assets/9239c504-44d2-4d34-a158-cfcf89af8bae" />
 
-Contains information such as your name, certificate authority (CA), expiration date, public key, etc.
+## 2. Configuration and Deployment 
 
-In HTTPS or encrypted communication, servers or clients use it for authentication.
+### Step 2: Customizing the Configuration File
 
-(2) yinyuang.key 
+A YAML configuration file must be created or modified to define the node's role, IP address, and point to the cryptographic assets.
 
-The private key is absolutely confidential and cannot be disclosed.
+**Key Configuration Parameters:**
 
--Collaborate with '. ctrt' for encrypted communication (such as decrypting messages sent by clients)
--Digital signature (proving that the message is from you personally)
+| Section | Parameter | Customization |
+| :--- | :--- | :--- |
+| `pki` | `cert` | Path to your **`yourname.crt`** |
+| `pki` | `key` | Path to your **`yinyuang.key`** |
+| `pki` | `ca` | Path to the root **`ca.crt`** |
+| `static_host_map` | `192.168.100.1` | The Lighthouse's public IP/port for initial contact. |
+| `firewall` | `inbound`/`outbound` | Custom rules to allow traffic (e.g., ICMP/Ping, SSH). |
 
-(3)ca.crt  
+<img width="924" height="143" alt="image" src="https://github.com/user-attachments/assets/03c37a07-01f1-494c-8028-85e18e74b280" />
 
-This is the root certificate of * * Certificate Authority (CA) * *. CA is a globally recognized authority (such as Let's Encrypt, DigiCert) or a self built authority within your organization.
+### Step 3: Running the Nebula Daemon
+<img width="1638" height="355" alt="image" src="https://github.com/user-attachments/assets/b99865b4-2cea-49f4-b8c6-b8ec08a1feee" />
 
-This is a certificate issued by a Certificate Authority (CA).
+## 3. Connectivity Verification (连通性验证)
+### Step 4: Testing ICMP Connectivity (Ping Test)
+From a separate terminal window, the connectivity to the Lighthouse (IP 192.168.100.1) is tested using the ICMP protocol (Ping).
+ping 192.168.100.1
+<img width="1586" height="674" alt="image" src="https://github.com/user-attachments/assets/4c506c6d-832c-4373-850a-d74f3b46ff26" />
 
-Used to verify the trustworthiness of your certificate, that is, to confirm whether 'your name. ctrt' is issued by a trusted CA.
+### Step 5: Testing Application Layer Connectivity (SSH Login)
+To confirm that the secure tunnel can reliably pass application traffic and that the identity is fully verified, an SSH login attempt is made.
 
-It can also be used to establish a trust chain to ensure the reliability of the identities of both parties in communication.
-
-2.Make your own configuration file and change it to fit myself
-
-![45c2876d4882d5c8429658eee90cc3be](D:\xwechat_files\wxid_me1xs1y80ngw12_ddf8\temp\RWTemp\2025-09\9e20f478899dc29eb19741386f9343c8\45c2876d4882d5c8429658eee90cc3be.png)
-
-3.Run nebula and check the connectivity between your computer and the light house.
-
-![image-20250916164325154](C:\Users\21534\Desktop\Lab02.assets\image-20250916164325154.png)
-
-4.Ping 192.168.100.1 from another terminal
-
-![image-20250916164418266](C:\Users\21534\Desktop\Lab02.assets\image-20250916164418266.png)
-
-5.Use ssh to log in
-
-![image-20250916165008190](C:\Users\21534\Desktop\Lab02.assets\image-20250916165008190.png)
+<img width="1621" height="695" alt="image" src="https://github.com/user-attachments/assets/63e9bde7-df61-45e6-8647-243cedc7760f" />
 
 
 
