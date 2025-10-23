@@ -14,126 +14,111 @@
 4. Save and exit (usually **F10**).
 
 
-## 2️⃣ 云计算成功的根本原因与优缺点
+## 2.The cloud is almost everywhere in our lives now. What do you think are the fundamental reasons behind its success? Name three pros and three cons of cloud.
 
-### 🌐 (1) Fundamental reasons for success / 成功的根本原因
-
-| English | 中文 |
-|----------|------|
-| **Cost optimization** – Shifts IT spending from CapEx to OpEx. | **成本优化**：将高额前期投入（CapEx）转为按需付费（OpEx）。 |
-| **Elasticity & scalability** – Automatically adjusts computing resources. | **弹性与可扩展性**：可根据实时需求自动扩展或收缩资源。 |
-| **Ubiquitous access** – Access from any device & location via internet. | **随时随地访问**：可通过互联网从任何设备访问资源。 |
-
+### (1) Fundamental reasons for success 
+| Reason | Explanation |
+| :--- | :--- |
+| **Cost Optimization** | Shifts IT spending from high upfront **Capital Expenditure (CapEx)** to flexible **Operating Expenditure (OpEx)**, eliminating costs for hardware procurement and maintenance. |
+| **Elasticity & Scalability** | Automatically and quickly adjusts computing resources (storage, processing power) based on real-time demand, preventing resource waste or shortages. |
+| **Ubiquitous Access** | Allows users to access data and applications from any device and location via the internet, strongly supporting mobile and remote work scenarios. |
 ---
 
-### ☁️ (2) Three pros of cloud / 云计算的三大优点
+### (2) Three pros of cloud 
 
-| English | 中文 |
-|----------|------|
-| **Reduced IT management burden** | **降低IT管理负担**：云服务商负责硬件维护与安全更新。 |
-| **Rapid deployment** | **快速部署**：新服务几分钟即可上线。 |
-| **Disaster recovery** | **灾难恢复能力强**：跨地域冗余备份，提高可靠性。 |
-
+| Pro | Detail |
+| :--- | :--- |
+| **Reduced IT Management Burden** | Cloud providers handle infrastructure maintenance, software updates, and security patches, allowing organizations to focus on core business. |
+| **Rapid Deployment** | New services or applications can be launched in minutes or hours, significantly accelerating time-to-market compared to traditional on-premises setup (weeks/months). |
+| **Disaster Recovery & Backup** | Offers redundant storage and backup solutions across geographically distributed data centers, enhancing data reliability and business continuity. |
 ---
 
-### ⚠️ (3) Three cons of cloud / 云计算的三大缺点
+### (3) Three cons of cloud 
 
-| English | 中文 |
-|----------|------|
-| **Dependency on internet** | **依赖网络连接**：无网络时无法访问云服务。 |
-| **Security & privacy risks** | **安全与隐私风险**：存在数据泄露、合规问题。 |
-| **Vendor lock-in** | **供应商锁定**：迁移云服务困难且成本高。 |
+| Con | Risk |
+| :--- | :--- |
+| **Dependency on Internet** | Cloud services are unavailable if internet connectivity is interrupted or poor, impacting critical business operations. |
+| **Security & Privacy Risks** | Data stored on third-party servers may face threats like unauthorized access, data breaches, or compliance issues with regional regulations (e.g., GDPR). |
+| **Vendor Lock-in** | Migrating data or applications between different cloud providers can be costly and complex due to incompatible technology stacks, APIs, or service models. |
 
----
+## 3. What is the primary function of a hypervisor in virtualization?
 
-## 3️⃣ The primary function of a hypervisor / 虚拟机管理程序的主要功能
-
-### **English**
 A **hypervisor (VMM)** creates, manages, and isolates **multiple virtual machines** on one physical host.  
 It enables:  
 - **Resource allocation** (CPU, memory, storage)  
 - **Isolation** between VMs  
-- **Hardware abstraction** to run different OSs on one host  
-
-### **中文**
-**虚拟机管理程序（Hypervisor 或 VMM）** 的主要功能是：  
-在单台物理主机上创建、管理并隔离多个虚拟机，实现：  
-- **资源分配**：按需分配 CPU、内存、磁盘等。  
-- **隔离性**：各虚拟机互不干扰。  
-- **硬件抽象**：屏蔽底层硬件细节，使不同系统共存。  
+- **Hardware abstraction** to run different OSs on one host    
 
 ---
 
-## 4️⃣ What is a Virtual Machine (VM)? / 什么是虚拟机？
+## 4. What is a Virtual Machine (VM)? 
 
-### **English**
 A **VM** is a software-based emulation of a physical computer.  
 It runs its own **guest operating system** and applications, managed by a **hypervisor** that shares physical resources (CPU, memory, storage, network) among VMs.
 
-### **中文**
-**虚拟机（VM）** 是一种基于软件的计算机仿真系统。  
-它拥有独立的 **客户操作系统（Guest OS）** 和应用程序，通过 **虚拟化管理器（Hypervisor）** 与其他虚拟机共享物理资源，同时保持逻辑隔离。  
 
+## 5️.What are the benefits of using virtual machines?
+
+| Benefit | Explanation |
+| :--- | :--- |
+| **Resource Efficiency** | Multiple VMs share the host machine's physical hardware, significantly reducing costs for physical servers, power, and data center space (Server Consolidation). |
+| **Isolation & Security** | Failures, crashes, or malware in one VM do not spread to other VMs or the host system, enhancing overall system stability and data security. |
+| **Flexible Testing & Development** | Developers can quickly create isolated environments with different OS versions or configurations for testing applications without affecting the host system. |
+| **Easy Backup & Recovery** | VMs can be saved, cloned, or exported as portable image files, allowing for quick backups and fast restoration to a previous working state. |
+| **Legacy Application Support** | Outdated applications or software requiring older operating systems can run securely within a VM, avoiding compatibility issues with modern host OSs. |
 ---
 
-## 5️⃣ Benefits of using virtual machines / 使用虚拟机的好处
-
-| English | 中文 |
-|----------|------|
-| **Resource efficiency** | **资源高效利用**：多台VM共享主机硬件，节省成本。 |
-| **Isolation & security** | **隔离与安全性**：故障或病毒不会影响其他VM。 |
-| **Flexible testing & development** | **灵活的测试环境**：可测试不同系统而不影响主机。 |
-| **Easy backup & recovery** | **便捷的备份与恢复**：VM可导出为镜像文件。 |
-| **Legacy app support** | **兼容旧系统**：可运行老旧应用和操作系统。 |
-
+## 6.List five use cases of virtual machines.
+1. **Software Development & Testing:** Utilizing VMs to simulate various operating systems and network environments for comprehensive application testing and debugging.
+2. **Server Consolidation:** Reducing the physical server count by running multiple virtual server instances (VMs) on a single physical host, lowering hardware and operational costs.
+3. **Education & Training:** Deploying standardized, pre-configured VM environments for students and trainees, ensuring a consistent and safe learning platform.
+4. **Cloud Computing Services (IaaS):** Serving as the core technology for Infrastructure-as-a-Service, allowing cloud providers to offer virtualized computing resources (virtual servers) on demand.
+5. **Legacy System Migration:** Running outdated or critical business applications that rely on obsolete operating systems within a VM, ensuring business continuity without maintaining old physical hardware.
 ---
 
-## 6️⃣ Five use cases of virtual machines / 虚拟机的五大应用场景
+## 7️.In virtualization, what is the guest operating system? 
+a) The main operating system running on the physical machine
+b) The operating system installed on a virtual machine
+c) The operating system running on a remote server
+d) The operating system running on a mobile device
 
-1. **Software development & testing** — 软件开发与测试  
-2. **Server consolidation** — 服务器整合与虚拟化部署  
-3. **Education & training** — 教育培训环境的统一与保护  
-4. **Cloud computing services (IaaS)** — 云计算服务（如 AWS EC2、Azure VM）  
-5. **Legacy system migration** — 旧系统迁移与业务延续  
-
----
-
-## 7️⃣ In virtualization, what is the guest operating system? / 虚拟化中的客户操作系统是？
-
-> ✅ **Answer / 答案：**  
+> **Answer ：**  
 > **b) The operating system installed on a virtual machine**  
-> **虚拟机中安装的操作系统。**
+A virtual machine is a virtual computer, and the guest operating system is the system you install and use on this virtual computer (for example, if you run a Linux virtual machine on your Windows computer, then Linux is the guest operating system)
 
 ---
 
-## 8️⃣ What does virtual machine isolation mean? / 虚拟机隔离是什么意思？
+## 8️.What does virtual machine isolation mean?
+a) Virtual machines can communicate directly with the physical hardware.
+b) Virtual machines share the same resources and cannot be isolated.
+c) Virtual machines run independently and are isolated from each other and the host system.
+d) Virtual machines can only be accessed locally.
 
-> ✅ **Answer / 答案：**  
+
+>  **Answer：**
 > **c) Virtual machines run independently and are isolated from each other and the host system.**  
-> **虚拟机彼此独立运行，与主机系统相互隔离。**
 
 ---
 
-## 9️⃣ Benefit of virtual machine portability / 虚拟机可移植性的好处
+## 9. What is the benefit of virtual machine portability?
+a) It allows virtual machines to communicate with each other easily.
+b) It ensures faster boot times for virtual machines.
+c) It allows virtual machines to be moved between different physical machines with compatible hypervisors.
+d) It reduces the need for hardware virtualization.
 
-> ✅ **Answer / 答案：**  
+>  **Answer ：**  
 > **c) It allows virtual machines to be moved between different physical machines with compatible hypervisors.**  
-> **可以在不同但兼容的主机之间迁移虚拟机。**
 
 ---
 
-## 🔟 Purpose of cloning a virtual machine / 克隆虚拟机的目的
+## 10. What is the purpose of cloning a virtual machine?
 
-### **English**
-Cloning creates an **exact copy** of an existing VM (OS, apps, configs, data) for:
-- **Rapid deployment**  
-- **Testing and debugging**  
-- **Disaster recovery**  
-- **Consistent environments**
+Cloning creates an **exact, ready-to-use copy** of an existing Virtual Machine (VM), including its operating system, applications, configurations, and data. This avoids the time-consuming process of manually installing and setting up a new VM from scratch.
 
-### **中文**
-克隆虚拟机是创建现有虚拟机的 **完整副本**（包括系统、软件、配置与数据），用于：
-- **快速部署**：快速创建同配置的虚拟机；  
-- **测试调试**：避免影响原系统；  
-- **灾备恢复**：在主机故障时迅速恢复；  
-- **环境一致性**：保证团队测试环境统一。  
+Common use cases for cloning include:
+
+1.  **Rapid Deployment:** Quickly scaling up services or creating multiple identical environments using a pre-configured template (the original VM).
+2.  **Testing and Debugging:** Using clones to test software updates, patches, or new features without risking the stability of the original production VM.
+3.  **Disaster Recovery:** Keeping cloned VMs as reliable backups; if the primary VM fails, the clone can be activated immediately to restore services.
+4.  **Consistent Environments:** Ensuring all team members (e.g., developers, testers) work on identical, standardized VM environments, eliminating configuration differences.
+
