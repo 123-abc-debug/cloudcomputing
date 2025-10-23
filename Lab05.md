@@ -1,50 +1,157 @@
-# 1.What is a container?
-解决的问题：你如何确保你的应用程序所需的Python（或Node或数据库）版本不受你机器上已有内容的影响？你如何管理潜在的冲突？
+# Lab05:Docker Core Concepts Tutorial & Notes
+# 1️.What is a Container?
+## The Problem It Solves
 
-https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/
+> How do you ensure that the version of Python (or Node, or Database) your application needs is not affected by what’s already installed on your machine?  
+> How do you manage potential conflicts between different environments?
 
-容器是一种轻量级、隔离的软件打包和运行技术，它解决了“在我机器上能跑，在你机器上就报错”的环境一致性问题。
-什么是容器？简单地说，容器是应用程序每个组件的独立进程。每个组件——前端React应用程序、Python API引擎和数据库——都在自己的隔离环境中运行，与机器上的其他一切完全隔离。
-React 前端在一个容器中运行；
-Python 后端在另一个容器中运行；
-数据库在第三个容器中运行；
+🔗 Reference: [What is a container? (Docker Documentation)](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
 
-## Containers versus virtual machines (VMs)
-容器和虚拟机的区别，我的理解是一个是创建一个虚拟的电脑，每开一个虚拟机，其实就是启动了一个完整的系统，资源开销很大（内存、CPU都要分一份）。
-一个是创建进程，一个被隔离开的进程（process）。它运行时，只带上自己需要的文件、依赖和配置。所有容器共用宿主机的操作系统内核（kernel），而不是各自带一个新的系统。各自为了满足不同的目的和效率
+---
 
-可以把两者结合：云服务商提供的“机器”其实往往是虚拟机（VM）。
+## Definition
 
-但在一台虚拟机里面，我们可以装一个容器运行环境（如 Docker）。
-然后在这个虚拟机里运行多个容器化的应用。
-## 如何运行一个容器？实际操作，使用GUI和CLI来操作Docker
-### 介绍一下使用gui的整个过程
-（1）在搜索框里面输入想要拉取的镜像，等价于docker pull <image-name>
- 你可以写 docker pull welcome-to-docker（若仓库上存在同名镜像）
+A **container** is a lightweight, isolated software packaging and execution technology.  
+It solves the famous problem:
 
-（2）镜像拉取成功后，给容器设置名字，点击 Run（运行）
+> “It works on my machine, but not on yours.”
 
-Docker 用镜像作为模板创建容器（容器是一个可运行的实例）。容器会被分配一个唯一 ID，并准备好运行镜像内定义的默认命令（ENTRYPOINT/CMD）。
-在点击 “Run” 之前，可以展开 Optional settings（可选设置） 来配置运行参数，如：
+Simply put:
+- A container is an **independent process environment** for an application.
+- Each component (e.g., frontend, backend, database) runs in its own container.
+- Containers are **isolated** from one another and from the host system.
 
-容器名称（Container name）
+Example:
+- The **React frontend** runs inside one container.  
+- The **Python backend** runs in another container.  
+- The **Database** runs in a third container.  
 
-端口映射（Host port ↔ Container port）
+Each container includes all dependencies, configuration, and files it needs — ensuring consistent behavior across machines.
 
-环境变量（Environment variables）
+---
 
-数据卷挂载（Volumes）
-（3）设置容器参数并运行，
-docker run -d --name welcome-to-docker -p 8080:80 <image-name>
-使用 CLI，可以通过一条命令完成相同的操作：
-docker run -d --name welcome-to-docker -p 8080:80 welcome-to-docker
-解释如下：
--d：后台运行容器（detached mode）
---name welcome-to-docker：设置容器名称
--p 8080:80：将主机 8080 端口映射到容器内 80 端口
-welcome-to-docker：镜像名称
-2. 点击运行，并设置容器名和主机端口（例如将容器端口80映射到主机端口8080）。
-3. 运行后，可以通过浏览器访问 `http://localhost:8080`查看运行中的网页应用。
+## Containers vs Virtual Machines (VMs)
+
+| Comparison Aspect | Containers | Virtual Machines (VMs) |
+|-------------------|-------------|--------------------------|
+| Startup Speed | Seconds | Minutes |
+| Resource Usage | Lightweight, shares host OS kernel | Heavy, each VM includes its own OS |
+| Isolation Level | Process-level | System-level |
+| Typical Use Case | Microservices, CI/CD | Cloud servers, multi-OS environments |
+
+### Conceptual Difference
+
+- **Virtual Machines (VMs):**  
+  Create a *virtual computer* with its own full operating system.  
+  Each VM consumes CPU, memory, and disk resources — heavier and slower.
+
+- **Containers:**  
+  Create *isolated processes* that share the same host OS kernel.  
+  They include only what’s necessary to run the app — faster and lighter.
+
+### Cobined Use Case
+
+They can complement each other:
+- Cloud providers often offer **virtual machines**.
+- Inside one VM, you can install **Docker** to run multiple **containers**.
+
+---
+
+## Try it Out: How to Run a Container (Using GUI and CLI)
+In this hands-on, you will see how to run a Docker container using the Docker Desktop GUI.
+### Using the GUI (Docker Desktop)
+
+<img width="1592" height="629" alt="image" src="https://github.com/user-attachments/assets/2e0ea33e-f05d-4ee7-8818-6719567884d5" />
+
+<img width="1647" height="1390" alt="image" src="https://github.com/user-attachments/assets/9bd6e0b7-1d52-4f94-9502-b18df99a2d5d" />
+
+<img width="1662" height="1197" alt="image" src="https://github.com/user-attachments/assets/1425e2e7-63b9-4819-a602-b3435b3755a4" />
+
+<img width="1233" height="168" alt="image" src="https://github.com/user-attachments/assets/35c12929-ce0b-4ff9-8631-ee5bb1113452" />
+
+
+
+# 2. What is an Image?
+
+Reference: [What is an image? (Docker Documentation)](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/)
+
+---
+
+##  What Is a Container Image?
+
+A **container image** is a **standardized package** that includes everything needed to run a container:
+- Application files and binaries  
+- System libraries and dependencies  
+- Configuration files  
+
+Think of it as a **blueprint** for creating containers.
+
+---
+
+### Example: The PostgreSQL Image
+
+A PostgreSQL image includes:
+- Database binaries (`postgres`, `initdb`, `psql`, etc.)  
+- Default configuration files (`postgresql.conf`, `pg_hba.conf`)  
+- Required system libraries (e.g., `libpq`)  
+
+When you start a container from this image,  
+the container behaves just like a mini server with PostgreSQL preinstalled and ready to use.
+
+---
+
+## Two Core Principles of Images
+
+### Images Are Immutable
+Once built, an image **cannot be changed**.  
+If you need to modify it, you build a **new image layer** on top of the existing one.
+
+### Images Are Layered
+
+Docker images are **composed of multiple filesystem layers**, not a single large file.  
+Each layer represents a specific modification or addition.
+
+| Layer | Description |
+|--------|--------------|
+| Layer 1 | Base image (e.g., Ubuntu) |
+| Layer 2 | Install Python |
+| Layer 3 | Install Flask dependencies |
+| Layer 4 | Copy your project source code |
+| Layer 5 | Set the startup command `CMD ["python", "app.py"]` |
+
+These layers stack together to form the complete image.  
+This design saves space and improves efficiency — layers can be shared across different images.
+
+---
+
+## 🧰 Practical Example
+
+Suppose you want to build a **Python application**.  
+You don’t need to start from scratch — instead:
+
+1. Use the official `python:3.11` image as the base.  
+2. Add your dependencies and project files.  
+3. Define your startup command.
+
+✅ The new image is simply your base Python image **plus** your additional layers — lightweight and reusable.
+
+---
+
+## 🌍 Docker Hub
+
+**Docker Hub** is the **official global repository** for Docker images —  
+a kind of *marketplace* where you can find prebuilt images for almost any software.
+
+For example:
+- Need **Redis** or **Memcached**?  
+  Just search for them on Docker Hub and pull the official image.
+
+With a single command, you can have the service running in seconds:
+```bash
+docker pull redis
+docker run -d --name my-redis redis
+
+
 
 # 2.What is an image?
 
@@ -74,19 +181,7 @@ PostgreSQL 镜像
 | Layer 4 | 复制你的项目代码                          |
 | Layer 5 | 设置启动命令 `CMD ["python", "app.py"]` |
 
-### 实际操作的例子
-你要做一个 Python 应用，不用从零开始；
 
-直接从官方 python:3.11 镜像继承；
-
-再添加你的依赖和代码层；
-
-这样生成的镜像只在原有基础上“叠加”了你的改动。
-
-## DockerHub
-Docker Hub 是一个全球性的、官方的 Docker 镜像仓库（Marketplace）
-举个例子：想用 Redis 或 Memcached？
-直接在 Docker Hub 搜索并下载对应的官方镜像，一两秒钟就能启动服务。
 
 ## 实操
 1.整个过程就是在image的dashboard里面搜索镜像和pull镜像
