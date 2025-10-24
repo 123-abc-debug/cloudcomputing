@@ -130,202 +130,88 @@ This design saves space and improves efficiency — layers can be shared across 
 <img width="1194" height="1117" alt="image" src="https://github.com/user-attachments/assets/45876aea-aa39-4cb2-8627-a381d6e0b416" />
 
 
+# 3.What is Docker Compose?
 
-# 
+📖 Source: [Docker Docs — What is Docker Compose?](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-docker-compose/)
 
-https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-docker-compose/
+## Background
+In previous examples, we’ve only worked with **single-container applications**.  
+However, real-world projects often need **multiple components**, such as:
+- Databases (MySQL, PostgreSQL)
+- Message queues (RabbitMQ, Kafka)
+- Caches (Redis, Memcached)
+- Web backends (Node.js, Python Flask/Django)
+- Frontend services (React, Vue)
+
+So the question arises:  
+> Should we install everything in a single container, or run multiple containers?  
+> If multiple, how do we connect them all together?
+
+---
+
+## Best Practice for Container Design
+> “**Each container should do one thing, and do it well.**”
+
+Each container should handle one specific function, for example:
+- One container runs the web service  
+- One container runs the database  
+- One container runs the cache  
+
+### Benefits:
+- **Modular design** — easy to maintain  
+- **Independent scaling or updating** — modify one service without affecting others  
+- **Improved stability and security**
+
+---
 
 
-# What is Docker Compose?
-解决的问题：运行多个容器？如果你运行多个，你如何将它们连接在一起？
+## Docker Compose Makes It Simple
 
-举个例子：
-但现实应用通常更复杂，会用到多个服务，例如：
-数据库（PostgreSQL、MySQL）
-消息队列（RabbitMQ、Kafka）
-缓存（Redis、Memcached）
-Web 后端（Python、Node.js）
-前端（React、Vue 等）
+With **Docker Compose**, everything becomes much easier.
 
-### docker compose是一个工具，用来管理多容器应用
-举个例子来说明优势
-集中管理
-web 和 db 两个容器都在同一个 YAML 文件中定义。
-团队成员只需 clone 仓库，就能用同一个文件启动完整应用。
+You can define **all your containers** (called *services*) and their configurations in a single **YAML file**.
 
-声明式（Declarative）
-
-YAML 文件中定义了希望的状态：web 容器连接 db，端口映射、环境变量、数据卷等。
-
-修改配置后再次执行：
-
+Then, start everything with just **one command**:
 docker compose up -d
 
 
-Compose 会智能应用更改，不必手动删除重建。
+### Dockerfile vs docker-compose.yml
 
-简化多容器操作
+| File Type              | Purpose                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| **Dockerfile**         | Defines **how to build an image** (install dependencies, copy code, set startup commands).       |
+| **docker-compose.yml** | Defines **how to run multiple containers** (including networks, ports, and dependencies).        |
+| **Relationship**       | The Compose file often references a Dockerfile to build the image needed for a specific service. |
 
-不用手动启动 docker run 多次，也不用手动配置网络。
 
-停止和清理整个应用只需一条命令：
+## Try it out 
+Use a Docker Compose to run a multi-container application. You'll use a simple to-do list app built with Node.js and MySQL as a database server.
 
-docker compose down
+Open a terminal and clone this sample application.git clone https://github.com/dockersamples/todo-list-app
 
-### difference between dockerfile 和 compose
-| 文件类型                   | 用途                                                 |
-| ---------------------- | -------------------------------------------------- |
-| **Dockerfile**         | 描述 **如何构建一个容器镜像**（例如安装 Python、依赖包、复制代码）。           |
-| **docker-compose.yml** | 描述 **运行哪些容器以及如何运行**（包括网络、端口、依赖关系）。                 |
-| **联系**                 | Compose 文件可以引用 Dockerfile 来构建某个服务的镜像，然后再用这个镜像启动容器。 |
 
-Dockerfile：构建你的 Python 应用镜像
-docker-compose.yml：启动 Python Web 服务 + PostgreSQL 数据库 + Redis 缓存，并把它们连接在同一个网络里
-### 集中管理
-- `web` 和 `db` 两个容器都在同一个 YAML 文件中定义。
-- 团队成员只需 clone 仓库，就能用同一个文件启动完整应用。
+<img width="1668" height="1267" alt="image" src="https://github.com/user-attachments/assets/6ec3d584-40bb-480f-a90f-2695cd33017e" />
 
-### 声明式（Declarative）
-- YAML 文件中定义了希望的状态：`web` 容器连接 `db`，端口映射、环境变量、数据卷等。
-- 修改配置后再次执行：
-```bash
-docker compose up -d
 
+<img width="1045" height="1155" alt="image" src="https://github.com/user-attachments/assets/529b73df-6cb3-447b-93fc-444b59ac636d" />
 
-## 实验，使用docker来运行一个多容器的应用
 
+Use the docker compose up command to start the application:
+<img width="1281" height="182" alt="image" src="https://github.com/user-attachments/assets/d8c4d9c5-41f7-452a-9a1f-5390d1f5990a" />
 
-https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/
+open http://localhost:3000 in the browser to see the site
+<img width="728" height="613" alt="image" src="https://github.com/user-attachments/assets/bd30af23-79b8-472d-8152-d655fa8190fd" />
 
+look at the Docker Desktop GUI
 
-https://docs.docker.com/get-started/docker-concepts/running-containers/overriding-container-defaults/
-https://docs.docker.com/get-started/docker-concepts/running-containers/persisting-container-data/
-https://docs.docker.com/get-started/docker-concepts/running-containers/sharing-local-files/
-https://docs.docker.com/get-started/docker-concepts/running-containers/multi-container-applications/
+<img width="1861" height="215" alt="image" src="https://github.com/user-attachments/assets/22089572-65ed-40ac-a7ca-012277474065" />
 
+use the docker compose down command to remove everything
+<img width="1925" height="149" alt="image" src="https://github.com/user-attachments/assets/a71580fb-06b4-4393-9666-35bb6a974b2d" />
 
-Please write a document with screenshots and notes and commit it to your github repo.
+If you do want to remove the volumes, add the --volumes flag when running the docker compose down command
+<img width="1926" height="126" alt="image" src="https://github.com/user-attachments/assets/49737818-66b8-4756-a762-b053d726e89a" />
 
-Recommendations:
-https://docs.docker.com/desktop/install/windows-install/
-https://docs.docker.com/desktop/wsl/
-
-
-
-
-
-1.https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/
-
-
-
-`docker run` → 创建并启动容器
-
-`-d` → 后台运行
-
-`-p 宿主机端口:容器端口` → 端口映射
-
-`docker/welcome-to-docker` → 镜像名称
-
-
-
-![image-20250924085523178](D:\.殷宇昂文件夹\.数学建模\微分方程总结\2024B代码\2020A题\革制品\云计算\Lab\Lab05.assets\image-20250924085523178.png)
-
-![image-20250924090052101](D:\.殷宇昂文件夹\.数学建模\微分方程总结\2024B代码\2020A题\革制品\云计算\Lab\Lab05.assets\image-20250924090052101.png)
-
-
-
-stop the docker
-
-![image-20250924090252950](D:\.殷宇昂文件夹\.数学建模\微分方程总结\2024B代码\2020A题\革制品\云计算\Lab\Lab05.assets\image-20250924090252950.png)
-
-容器镜像 (Image)
-
-**镜像 (Image)** 就是打包好这些内容的标准包。
-
-镜像来源：Docker Hub
-
-![image-20250924091023519](D:\.殷宇昂文件夹\.数学建模\微分方程总结\2024B代码\2020A题\革制品\云计算\Lab\Lab05.assets\image-20250924091023519.png)
-
-
-
-https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-docker-compose/
-
-它清晰地解释了 Compose 要解决的核心问题、其工作原理和基本用法。
-
-**Docker Compose 是一个用于定义和运行多容器 Docker 应用程序的工具**。当你的应用需要多个服务（如前端、后端、数据库、缓存等）时，它让你无需手动管理每个容器，而是通过一个声明式的 YAML 文件来统一配置和启动所有服务。
-
-Compose 通过一个 **`compose.yaml`文件** 解决上述所有问题。可以在单个YAML文件中定义所有容器及其配置，Compose是一个声明性工具——你只需定义它并执行即可
-
-dockerfile的样子
-
-使用Python官方镜像作为基础
-
-FROM python:3.9-slim
-
-设置工作目录
-
-WORKDIR /app
-
-将当前目录的文件复制到容器的 /app 目录下
-
-COPY . .
-
-安装依赖：Flask 和 Redis 客户端库
-
-RUN pip install flask redis
-
-设置容器启动时自动运行的命令
-
-CMD ["python", "app.py"]
-
-### compose的样子
-
-version: '3.8'
-
-services:
-
-定义 Web 应用服务
-
-  web:
-    build: .  # 关键！这告诉Compose：web服务的镜像，需要根据当前目录的 Dockerfile 来构建。
-    ports:
-      - "5000:5000"  # 端口映射
-    depends_on:
-      - redis  # 明确告知Compose：web服务依赖于redis服务，请先启动redis。
-
-定义 Redis 服务
-
-  redis:
-    image: "redis:alpine"  # 直接使用Docker官方提供的Redis镜像，无需自己写Dockerfile。
-
-
-
-### 尝试
-
-您将使用一个使用Node.js和MySQL构建的简单待办事项列表应用程序作为数据库服务器。
-
-1.下载安装docker桌面
-
-2.克隆to-do-list的链接
-
-![image-20251015081439812](D:\.殷宇昂文件夹\.数学建模\微分方程总结\2024B代码\2020A题\革制品\云计算\Lab\Lab05.assets\image-20251015081439812.png)
-
-compose.yaml代码解释
-
-![image-20251015082457836](D:\.殷宇昂文件夹\.数学建模\微分方程总结\2024B代码\2020A题\革制品\云计算\Lab\Lab05.assets\image-20251015082457836.png)
-
-**`services` (服务)：** 定义了您想要运行的独立容器。这里定义了 `app` (Node.js) 和 `mysql` 两个服务。
-
-**`volumes` (卷)：** 定义了用于持久化数据的存储区域。这里定义了 `todo-mysql-data` 卷来保存数据库数据。
-
-
-
-
-
-https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/
-
-
-https://docs.docker.com/get-started/docker-concepts/running-containers/overriding-container-defaults/
 
 
 
