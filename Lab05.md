@@ -124,99 +124,14 @@ This design saves space and improves efficiency — layers can be shared across 
 
 ---
 
-## 🧰 Practical Example
+## Try it out:search and pull a container image using the Docker Desktop GUI.
 
-Suppose you want to build a **Python application**.  
-You don’t need to start from scratch — instead:
-
-1. Use the official `python:3.11` image as the base.  
-2. Add your dependencies and project files.  
-3. Define your startup command.
-
-✅ The new image is simply your base Python image **plus** your additional layers — lightweight and reusable.
-
----
-
-## 🌍 Docker Hub
-
-**Docker Hub** is the **official global repository** for Docker images —  
-a kind of *marketplace* where you can find prebuilt images for almost any software.
-
-For example:
-- Need **Redis** or **Memcached**?  
-  Just search for them on Docker Hub and pull the official image.
-
-With a single command, you can have the service running in seconds:
-```bash
-docker pull redis
-docker run -d --name my-redis redis
+<img width="1547" height="558" alt="image" src="https://github.com/user-attachments/assets/043b43b4-502d-43dc-b5e6-f6a6de5befcd" />
+<img width="1194" height="1117" alt="image" src="https://github.com/user-attachments/assets/45876aea-aa39-4cb2-8627-a381d6e0b416" />
 
 
 
-# 2.What is an image?
-
-https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/
-
-**容器是一个隔离的进程，但这个进程运行所需要的所有文件、配置和环境从哪里来？答案就是：镜像。**
-容器本质上只是一个在宿主机上运行的进程，它被限制在自己的命名空间中，拥有独立的文件系统、网络和进程空间。
-但容器本身不会凭空生成文件系统，它需要一个“模板”——这就是 容器镜像（image）
-
-## 什么是容器镜像
-容器映像是一个标准化的包，其中包括运行容器的所有文件、二进制文件、库和配置。
-举个例子：
-PostgreSQL 镜像
-包含数据库二进制文件（postgres, initdb, psql 等）；
-包含默认配置文件（postgresql.conf, pg_hba.conf）；
-还包含运行所需的系统库（比如 libpq 等）。
-运行后，容器内部就像一台装好了 PostgreSQL 的小服务器。
-
-## 镜像的两个核心原则
-镜像是不可变的
-镜像是有多层组成，Docker 镜像并不是一个单一的大文件，而是由**多层文件系统（layers）**叠加组成的。举个例子：
-| 层级      | 内容                                |
-| ------- | --------------------------------- |
-| Layer 1 | 基础镜像，比如 Ubuntu                    |
-| Layer 2 | 安装 Python                         |
-| Layer 3 | 安装 Flask 依赖                       |
-| Layer 4 | 复制你的项目代码                          |
-| Layer 5 | 设置启动命令 `CMD ["python", "app.py"]` |
-
-
-
-## 实操
-1.整个过程就是在image的dashboard里面搜索镜像和pull镜像
- “Pull” 是 Docker 中的一个核心操作，意思是：从远程镜像仓库（通常是 Docker Hub）下载镜像到本地。
-“本地”指的是 Docker Engine 管理的宿主机存储区域，镜像被下载到这里，由 Docker 统一管理，而不是你电脑上的普通文件夹。
-
-2.通过 Docker Desktop 的镜像详情页面可以查看镜像内部的一些具体信息
-在 Docker Desktop 中选中某个镜像，然后进入 **Image Details（镜像详情）** 页面，你通常可以看到：
-
-### 1. 镜像的层（Layers）
-- 每一层代表镜像在某一步构建中增加、删除或修改的文件系统内容。
-- 可以看到层的顺序和大小，有助于分析镜像构建和优化。
-
-### 2. 已安装的包和库（Packages and libraries）
-- 如果镜像中有包管理器（比如 `apt` 或 `pip`），Docker Desktop 会列出部分被安装的软件包。
-- 有些镜像会显示版本信息，方便你确认依赖环境。
-
-### 3. 发现的漏洞（Vulnerabilities）
-- Docker Desktop 会扫描镜像已知安全漏洞（如果开启了安全扫描）。
-- 可以帮助开发者判断镜像是否安全，是否需要更新。
-
-
-## 自己探索里面的东西
-通过 Docker Desktop 的 Containers → Files 页面，你可以像在资源管理器中一样浏览容器的内部文件系统，看到容器隔离环境里的内容，而不会影响你的本地系统。
-
-
-
-**镜像是一个标准化的软件包**，它包含了运行一个容器所需的一切：
-
-- **文件**（你的应用代码）
-- **二进制程序**（如 Python、Node.js 的解释器）
-- **库文件**（应用依赖的第三方库）
-- **配置文件**
-
-
+# 
 
 https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-docker-compose/
 
